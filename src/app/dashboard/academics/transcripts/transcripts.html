@@ -1,0 +1,65 @@
+<div class="bg-white rounded-lg shadow-md p-8">
+  <h2 class="text-3xl font-bold text-slate-800 mb-8">Academic Transcript</h2>
+
+  <div class="grid grid-cols-2 gap-6 mb-8">
+    <div>
+      <p class="text-slate-600">Student</p>
+      <p class="font-semibold text-slate-800">{{ student()?.name }}</p>
+    </div>
+    <div>
+      <p class="text-slate-600">Current GPA</p>
+      <p class="font-semibold text-2xl text-blue-600">{{ gpa() }}</p>
+    </div>
+  </div>
+
+  @defer {
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-slate-200">
+      <thead>
+        <tr class="bg-slate-100">
+          <th
+            scope="col"
+            class="p-4 text-left text-sm font-semibold text-slate-700 uppercase tracking-wider"
+          >
+            Code
+          </th>
+          <th
+            scope="col"
+            class="p-4 text-left text-sm font-semibold text-slate-700 uppercase tracking-wider"
+          >
+            Course Title
+          </th>
+          <th
+            scope="col"
+            class="p-4 text-left text-sm font-semibold text-slate-700 uppercase tracking-wider"
+          >
+            Credits
+          </th>
+          <th
+            scope="col"
+            class="p-4 text-left text-sm font-semibold text-slate-700 uppercase tracking-wider"
+          >
+            Grade
+          </th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-slate-200">
+        @for (course of student()?.transcript; track course.id) {
+        <tr class="hover:bg-slate-50">
+          <td class="p-4 whitespace-nowrap text-sm font-medium text-slate-900">
+            {{ course.code }}
+          </td>
+          <td class="p-4 whitespace-nowrap text-sm text-slate-600">{{ course.title }}</td>
+          <td class="p-4 whitespace-nowrap text-sm text-slate-600">{{ course.credits }}</td>
+          <td class="p-4 whitespace-nowrap text-sm font-semibold text-slate-900">
+            {{ course.grade }}
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  } @placeholder {
+  <div class="text-center py-16 text-slate-500">Loading transcript...</div>
+  }
+</div>

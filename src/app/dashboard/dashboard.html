@@ -1,0 +1,59 @@
+<div class="min-h-screen bg-gray-100">
+  <!-- Header -->
+  <header class="bg-slate-800 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Student Portal</h1>
+      <div class="flex items-center gap-6">
+        <span>Welcome, {{ student()!.name.split(' ')[0] }}</span>
+        <button (click)="logout()" class="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700">
+          Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 py-8 flex gap-8">
+    <!-- Sidebar - Updated to a more neutral, professional dark slate -->
+    <aside class="w-64 bg-slate-800 rounded-lg shadow p-6">
+      <nav class="space-y-2">
+        <a
+          routerLink="/dashboard/home"
+          routerLinkActive="bg-blue-600 text-white"
+          class="block px-4 py-3 rounded-lg hover:bg-slate-700 hover:text-white text-slate-300 font-semibold"
+          >Dashboard Home</a
+        >
+        <a
+          routerLink="/dashboard/academics"
+          routerLinkActive="bg-blue-600 text-white"
+          class="block px-4 py-3 rounded-lg hover:bg-slate-700 hover:text-white text-slate-300 font-semibold"
+          >Academic Records</a
+        >
+        <a
+          routerLink="/dashboard/courses"
+          routerLinkActive="bg-blue-600 text-white"
+          class="block px-4 py-3 rounded-lg hover:bg-slate-700 hover:text-white text-slate-300 font-semibold"
+          >Course Registration</a
+        >
+        <a
+          routerLink="/dashboard/fees"
+          routerLinkActive="bg-blue-600 text-white"
+          class="block px-4 py-3 rounded-lg hover:bg-slate-700 hover:text-white text-slate-300 font-semibold"
+          >Fees & Payments</a
+        >
+      </nav>
+
+      <div class="mt-8 p-4 bg-amber-50 rounded-lg border border-amber-200">
+        <p class="font-semibold text-amber-800">Outstanding Balance</p>
+        <p class="text-2xl font-bold text-amber-600">{{ student()!.balance | currency : 'NGN' }}</p>
+        @if (student()!.balance > 0) {
+        <p class="text-sm text-amber-700 mt-2">Clear balance to register courses</p>
+        }
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+      <router-outlet />
+    </main>
+  </div>
+</div>
